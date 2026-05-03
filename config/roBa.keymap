@@ -27,8 +27,7 @@
 
 &trackball {
     // マウスの速度（解像度）を設定
-    cpi = <1500>;
-
+    
     scroll-layers = <5>;
     snipe-layers = <4>;
 };
