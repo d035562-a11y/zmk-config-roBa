@@ -27,7 +27,7 @@
 
 &trackball {
     // automouse-layer = <4>; 
-    cpi = <1500>;
+
     scroll-layers = <2 5>;
     snipe-layers = <4>;
 };
