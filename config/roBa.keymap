@@ -164,7 +164,7 @@
         ARROW {
             bindings = <
 &kp PAGE_UP    &kp F2    &kp UP_ARROW    &kp F4        &kp MINUS                         &kp SLASH     &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp MINUS
-&kp PAGE_DOWN  &kp LEFT  &kp DOWN_ARROW  &kp RIGHT     &kp LS(SEMI)  &trans      &trans  &kp ASTERISK  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp PLUS
+&kp PAGE_DOWN  &kp LEFT  &kp DOWN_ARROW  &kp RIGHT     &kp LS(SEMI)  &trans      &trans  &kp ASTERISK  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp COLON
 &kp NUMBER_0   &kp F7    &kp F8          &kp F11       &trans        &trans      &trans  &kp PERIOD    &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_0
 &trans         &trans    &trans          &kp NUMBER_0  &trans        &trans      &trans  &kp NUMBER_0                                            &trans
             >;
@@ -210,7 +210,7 @@
 
         JIS_MAP {
             bindings = <
-&kp EXCL  &kp LBKT  &kp HASH  &kp DLLR  &kp PRCNT                      &kp UNDERSCORE  &kp SQT   &kp STAR  &kp LPAR  &kp EQUAL
+&kp EXCL  &kp LBKT  &kp HASH  &kp DLLR  &kp PRCNT                      &kp UNDERSCORE  &kp SQT   &kp STAR  &kp LPAR  &kp CARET
 &kp ESC   &trans    &macro_s  &macro_d  &macro_s   &trans      &trans  &kp AMPS        &kp SQT   &kp RBKT  &kp BSLH  &kp RS(INT1)
 &trans    &trans    &trans    &trans    &macro_d   &trans      &trans  &kp AT          &kp PLUS  &kp PLUS  &kp SQT   &kp RS(QUESTION)
 &trans    &trans    &trans    &trans    &trans     &trans      &trans  &trans                                        &trans
