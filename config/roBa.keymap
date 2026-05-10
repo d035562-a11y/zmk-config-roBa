@@ -184,7 +184,7 @@
             bindings = <
 &kp Q                 &kp W         &kp E     &kp R     &kp T                                          &kp Y        &kp U  &kp I        &kp O    &kp P
 &kp A                 &kp S         &kp D     &kp F     &kp G        &kp LS(LG(S))      &kp DELETE     &kp H        &kp J  &lt 6 K      &kp L    &mt RIGHT_CONTROL MINUS
-&mt LSHIFT Z          &kp X         &kp C     &kp V     &kp B        &kp LEFT_WIN       &lt 7 ESCAPE   &kp N        &kp M  &lt 6 COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH
+&mt LSHIFT Z          &kp X         &kp C     &kp V     &kp B        &kp LEFT_WIN       &lt 7 ESCAPE   &kp N        &kp M  &lt 5 COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH
 &mt LCTRL LANGUAGE_2  &kp LEFT_ALT  &mkp MB2  &mkp MB1  &lt 3 SPACE  &lt 9 TAB          &kp BACKSPACE  &lt 2 ENTER                               &mt RIGHT_ALT LANGUAGE_1
             >;
 
@@ -195,7 +195,7 @@
             bindings = <
 &kp Q                 &kp W         &kp E     &kp R     &kp T                                          &kp Y        &kp U  &kp I        &kp O    &kp P
 &kp A                 &kp S         &kp D     &kp F     &kp G        &kp LS(LG(S))      &kp DELETE     &kp H        &kp J  &lt 6 K      &kp L    &mt RIGHT_CONTROL MINUS
-&mt LSHIFT Z          &kp X         &kp C     &kp V     &kp B        &kp LEFT_WIN       &lt 7 ESCAPE   &kp N        &kp M  &lt 6 COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH
+&mt LSHIFT Z          &kp X         &kp C     &kp V     &kp B        &kp LEFT_WIN       &lt 7 ESCAPE   &kp N        &kp M  &lt 5 COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH
 &mt LCTRL LANGUAGE_2  &kp LEFT_ALT  &mkp MB2  &mkp MB1  &lt 4 SPACE  &lt 8 TAB          &kp BACKSPACE  &lt 2 ENTER                               &mt RIGHT_ALT LANGUAGE_1
             >;
 
