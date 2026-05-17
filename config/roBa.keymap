@@ -17,9 +17,12 @@
 #define US_M  8
 #define JIS_M 9
 
-/* --- ロータリーエンコーダーを有効化 --- */
+/* --- ロータリーエンコーダーを有効化と感度調整 --- */
 
-&left_encoder { status = "okay"; };
+&left_encoder { 
+    status = "okay"; 
+    resolution = <2>;  /* ← エンコーダーの反応を落とす（鈍らせる）設定 */
+};
 
 &mt {
     flavor = "balanced";
@@ -168,7 +171,7 @@
             label = "ENCODER_MSC_DOWN_UP";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-            /* tap-ms を削除（スクロール暴走対策） */
+            /* tap-ms は削除済み（スクロール暴走対策） */
         };
     };
 
