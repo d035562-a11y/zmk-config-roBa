@@ -21,7 +21,7 @@
 
 &left_encoder { 
     status = "okay"; 
-    resolution = <2>;  /* ← エンコーダーの反応を落とす（鈍らせる）設定 */
+    resolution = <2>;  /* ← 回した時の暴走を抑える感度調整（まだ敏感すぎる場合は 4 にしてください） */
 };
 
 &mt {
@@ -165,14 +165,8 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
-
-        encoder_msc_down_up: encoder_msc_down_up {
-            compatible = "zmk,behavior-sensor-rotate";
-            label = "ENCODER_MSC_DOWN_UP";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-            /* tap-ms は削除済み（スクロール暴走対策） */
-        };
+        
+        /* 動かなかった古いカスタムエンコーダー定義（encoder_msc_down_up）は削除しました */
     };
 
     /* --- 4. キーマップ本体 --- */
@@ -190,8 +184,11 @@
 &mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 9 TAB  &lt 3 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                              &mt RIGHT_ALT LANGUAGE_1
             >;
 
+            /* 公式標準の上下スクロールマクロに変更 */
             sensor-bindings = <&inc_dec_msc SCRL_DOWN SCRL_UP>;
         };
+
+        /* [1] US_DEFO */
 
         us_defo {
             bindings = <
@@ -201,8 +198,11 @@
 &mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 8 TAB  &lt 4 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                              &mt RIGHT_ALT LANGUAGE_1
             >;
 
+            /* 公式標準の上下スクロールマクロに変更 */
             sensor-bindings = <&inc_dec_msc SCRL_DOWN SCRL_UP>;
         };
+
+        /* [2] ARROW */
 
         ARROW {
             bindings = <
@@ -212,6 +212,8 @@
 &trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans                                           &kp F12
             >;
         };
+
+        /* [3] NUM_JIS */
 
         NUM_JIS {
             bindings = <
@@ -224,6 +226,8 @@
             sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
         };
 
+        /* [4] NUM_US */
+
         NUM_US {
             bindings = <
 &kp PAGE_UP   &kp F2    &kp UP_ARROW  &kp F4        &kp MINUS                         &kp SLASH     &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp MINUS
@@ -235,6 +239,8 @@
             sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
         };
 
+        /* [5] MOUSE */
+
         MOUSE {
             bindings = <
 &trans     &mkp MB2   &kp UP    &kp F4     &trans                      &trans  &trans    &trans  &trans    &trans
@@ -244,40 +250,11 @@
             >;
         };
 
+        /* [6] SCROLL */
+
         SCROLL {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
-            >;
-        };
-
-        SYSTEM {
-            bindings = <
-&bt0_jis    &bt1_us         &bt2_us   &bt3_us   &bt4_us                                  &trans  &trans  &trans  &trans  &trans
-&trans      &macro_s        &macro_d  &macro_s  &trans   &trans      &trans       &trans  &trans  &trans  &trans  &trans
-&bt BT_CLR  &bt BT_CLR_ALL  &kp N2    &kp N3    &trans   &trans      &bootloader  &trans  &trans  &trans  &trans  &trans
-&trans      &trans          &trans    &trans    &trans   &trans      &trans       &trans                          &trans
-            >;
-        };
-
-        US_MAP {
-            bindings = <
-&kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT                      &kp LCTRL  &kp AMPS     &kp LPAR  &kp RPAR  &kp EQUAL
-&trans    &trans  &trans    &trans    &trans     &trans      &trans  &kp TILDE  &kp RS(SQT)  &kp LBKT  &kp RBKT  &kp MINUS
-&trans    &trans  &trans    &trans    &trans     &trans      &trans  &kp DQT    &kp DQT      &kp LT    &kp GT    &kp QUESTION
-&trans    &trans  &trans    &trans    &trans     &trans      &trans  &trans                                      &trans
-            >;
-        };
-
-        JIS_MAP {
-            bindings = <
-&kp EXCL  &kp LBKT  &kp HASH  &kp DLLR  &kp PRCNT                      &kp UNDERSCORE  &kp SQT   &kp STAR  &kp LPAR  &kp RS(MINUS)
-&kp ESC   &trans    &macro_s  &macro_d  &macro_s   &trans      &trans  &kp AMPS        &kp SQT   &kp RBKT  &kp BSLH  &kp RS(INT1)
-&trans    &trans    &trans    &trans    &macro_d   &trans      &trans  &kp AT          &kp PLUS  &kp PLUS  &kp SQT   &kp RS(QUESTION)
-&trans    &trans    &trans    &trans    &trans     &trans      &trans  &trans                                        &trans
-            >;
-        };
-    };
-};
+&trans  &trans  &trans
