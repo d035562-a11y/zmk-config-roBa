@@ -190,7 +190,7 @@
 &mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 9 TAB  &lt 3 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                              &mt RIGHT_ALT LANGUAGE_1
             >;
 
-            sensor-bindings = <&encoder_msc_down_up>;
+            sensor-bindings = <&inc_dec_msc SCRL_DOWN SCRL_UP>;
         };
 
         us_defo {
@@ -201,7 +201,7 @@
 &mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 8 TAB  &lt 4 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                              &mt RIGHT_ALT LANGUAGE_1
             >;
 
-            sensor-bindings = <&encoder_msc_down_up>;
+            sensor-bindings = <&inc_dec_msc SCRL_DOWN SCRL_UP>;
         };
 
         ARROW {
