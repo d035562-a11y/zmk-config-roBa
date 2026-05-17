@@ -16,10 +16,9 @@
 #define JIS_M 9
 
 /* --- ロータリーエンコーダーを有効化と感度調整 --- */
-
 &left_encoder { 
     status = "okay"; 
-    resolution = <2>;  /* ← 回した時の暴走を抑える感度調整（まだ敏感すぎる場合は 4 にしてください） */
+    resolution = <2>;  /* ← オリジナルの tap-ms = <20> が渋滞を起こさないよう、ここで信号の間引きを行います */
 };
 
 &mt {
@@ -86,7 +85,7 @@
             #binding-cells = <0>;
             wait-ms = <30>;
             tap-ms = <30>;
-            bindings = <&kp LS(A) &kp N2 &kp N9 &kp N5 &kp X &kp P>;
+            bindings = <&kp LS(A) &kp N2 &kp N9 &kp N5 & x &kp P>;
             label = "MACRO_D";
         };
 
@@ -145,6 +144,14 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
+
+        /* ▼ robaオリジナルの定義を完全に再現して導入 ▼ */
+        scroll_up_down: mouse_wheel_up_down {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+            tap-ms = <20>;
+        };
     };
 
     /* --- 4. キーマップ本体 --- */
@@ -159,8 +166,8 @@
 &mt LSHIFT Z                 &kp X         &kp C         &kp V      &kp B        &mkp MB2           &lt 7 ESCAPE   &kp N        &kp M  &lt 5 COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH
 &mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 9 TAB  &lt 3 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                              &mt RIGHT_ALT LANGUAGE_1
             >;
-            /* ▼ ここを変更：確実に動くキーボードの矢印（下・上）を割り当て ▼ */
-            sensor-bindings = <&inc_dec_kp DOWN UP>;
+            /* ▼ roba公式のあだ名（scroll_up_down）でセンサーをバインド ▼ */
+            sensor-bindings = <&scroll_up_down>;
         };
 
         /* [1] US_DEFO */
@@ -171,8 +178,8 @@
 &mt LSHIFT Z                 &kp X         &kp C         &kp V      &kp B        &mkp MB2           &lt 7 ESCAPE   &kp N        &kp M  &lt 5 COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH
 &mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 8 TAB  &lt 4 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                              &mt RIGHT_ALT LANGUAGE_1
             >;
-            /* ▼ ここを変更：確実に動くキーボードの矢印（下・上）を割り当て ▼ */
-            sensor-bindings = <&inc_dec_kp DOWN UP>;
+            /* ▼ roba公式のあだ名（scroll_up_down）でセンサーをバインド ▼ */
+            sensor-bindings = <&scroll_up_down>;
         };
 
         /* [2] ARROW */
