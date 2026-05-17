@@ -1,16 +1,11 @@
 manifest:
   remotes:
-    - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
-    - name: kumamuk-git
-      url-base: https://github.com/kumamuk-git
+    - name: higo
+      url-base: https://github.com/higo-p
   projects:
     - name: zmk
-      remote: zmkfirmware
-      revision: v0.3-branch
+      remote: higo
+      revision: main-keyball
       import: app/west.yml
-    - name: zmk-pmw3610-driver
-      remote: kumamuk-git
-      revision: main
   self:
     path: config
