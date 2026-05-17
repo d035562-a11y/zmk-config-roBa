@@ -4,8 +4,6 @@
 #include <dt-bindings/zmk/pointing.h>
 
 /* --- レイヤー番号の定義（優先度順） --- */
-/* 上にあるものほどベース向け、下にあるものほど上に重なる */
-
 #define DEF   0
 #define US_D  1
 #define NUM   2
@@ -30,47 +28,34 @@
 };
 
 &trackball {
-    // マウスの速度（解像度）を設定（数字ではなく定数名で指定）
-
     scroll-layers = <SCR>;
     snipe-layers = <MOU>;
 };
 
 / {
     /* --- 1. コンボ設定 --- */
-
     combos {
         compatible = "zmk,combos";
-
-        // Q + W = ESC
 
         combo_esc {
             bindings = <&kp ESCAPE>;
             key-positions = <0 1>;
         };
 
-        // F + G = 左クリック (マウスレイヤーに入らなくても押せる)
-
         combo_click {
             bindings = <&mkp MB1>;
             key-positions = <13 14>;
         };
-
-        // , + . = ー（長音符/マイナス）
 
         combo_minus {
             bindings = <&kp MINUS>;
             key-positions = <31 32>;
         };
 
-        // S + D = Alt + Tab (アプリ切り替え)
-
         combo_alttab {
             bindings = <&kp LA(TAB)>;
             key-positions = <11 12>;
         };
-
-        // I + O = Delete (右側の文字を消す)
 
         combo_del {
             bindings = <&kp DELETE>;
@@ -79,7 +64,6 @@
     };
 
     /* --- 2. マクロ設定 --- */
-
     macros {
         to_layer_0: to_layer_0 {
             compatible = "zmk,behavior-macro-one-param";
@@ -106,14 +90,12 @@
             label = "MACRO_D";
         };
 
-        // ▼ Bluetooth + レイヤー移動マクロ ▼
-
         bt0_jis: bt0_jis {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <10>;
             tap-ms = <10>;
-            bindings = <&bt BT_SEL 0 &to 0>; // JISベース(Layer 0)へ
+            bindings = <&bt BT_SEL 0 &to 0>;
             label = "BT0_JIS";
         };
 
@@ -122,7 +104,7 @@
             #binding-cells = <0>;
             wait-ms = <10>;
             tap-ms = <10>;
-            bindings = <&bt BT_SEL 1 &to 1>; // USベース(Layer 1)へ
+            bindings = <&bt BT_SEL 1 &to 1>;
             label = "BT1_US";
         };
 
@@ -155,27 +137,21 @@
     };
 
     /* --- 3. 挙動(Behaviors)設定 --- */
-
     behaviors {
         lt_to_layer_0: lt_to_layer_0 {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_TO_0";
             bindings = <&mo>, <&to_layer_0>;
-
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
-        
-        /* 動かなかった古いカスタムエンコーダー定義（encoder_msc_down_up）は削除しました */
     };
 
     /* --- 4. キーマップ本体 --- */
-
     keymap {
         compatible = "zmk,keymap";
 
         /* [0] DEFAULT (JIS OS 用) */
-
         default_layer {
             bindings = <
 &kp Q                        &kp W         &kp E         &kp R      &kp T                                                          &kp Y        &kp U  &kp I        &kp O    &kp P
@@ -183,13 +159,11 @@
 &mt LSHIFT Z                 &kp X         &kp C         &kp V      &kp B        &mkp MB2           &lt 7 ESCAPE   &kp N        &kp M  &lt 5 COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH
 &mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 9 TAB  &lt 3 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                              &mt RIGHT_ALT LANGUAGE_1
             >;
-
-            /* 公式標準の上下スクロールマクロに変更 */
-            sensor-bindings = <&inc_dec_msc SCRL_DOWN SCRL_UP>;
+            /* ▼ ここを変更：確実に動くキーボードの矢印（下・上）を割り当て ▼ */
+            sensor-bindings = <&inc_dec_kp DOWN UP>;
         };
 
         /* [1] US_DEFO */
-
         us_defo {
             bindings = <
 &kp Q                        &kp W         &kp E         &kp R      &kp T                                                          &kp Y        &kp U  &kp I        &kp O    &kp P
@@ -197,13 +171,11 @@
 &mt LSHIFT Z                 &kp X         &kp C         &kp V      &kp B        &mkp MB2           &lt 7 ESCAPE   &kp N        &kp M  &lt 5 COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH
 &mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 8 TAB  &lt 4 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                              &mt RIGHT_ALT LANGUAGE_1
             >;
-
-            /* 公式標準の上下スクロールマクロに変更 */
-            sensor-bindings = <&inc_dec_msc SCRL_DOWN SCRL_UP>;
+            /* ▼ ここを変更：確実に動くキーボードの矢印（下・上）を割り当て ▼ */
+            sensor-bindings = <&inc_dec_kp DOWN UP>;
         };
 
         /* [2] ARROW */
-
         ARROW {
             bindings = <
 &trans  &kp F2  &trans  &kp F4  &trans                       &kp RS(RG(LEFT))  &kp F2    &kp UP    &kp F4     &kp RS(RG(RIGHT))
@@ -214,7 +186,6 @@
         };
 
         /* [3] NUM_JIS */
-
         NUM_JIS {
             bindings = <
 &kp PAGE_UP   &kp F2    &kp UP_ARROW  &kp F4        &kp MINUS                         &kp SLASH     &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp MINUS
@@ -222,12 +193,10 @@
 &kp NUMBER_0  &kp F7    &kp F8        &kp F11       &trans        &trans      &trans  &kp PERIOD    &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_0
 &trans        &trans    &trans        &kp NUMBER_0  &trans        &trans      &trans  &kp NUMBER_0                                            &trans
             >;
-
             sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
         };
 
         /* [4] NUM_US */
-
         NUM_US {
             bindings = <
 &kp PAGE_UP   &kp F2    &kp UP_ARROW  &kp F4        &kp MINUS                         &kp SLASH     &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp MINUS
@@ -235,12 +204,10 @@
 &kp NUMBER_0  &kp F7    &kp F8        &kp F11       &trans        &trans      &trans  &kp PERIOD    &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_0
 &trans        &trans    &trans        &kp NUMBER_0  &trans        &trans      &trans  &kp NUMBER_0                                            &trans
             >;
-
             sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
         };
 
         /* [5] MOUSE */
-
         MOUSE {
             bindings = <
 &trans     &mkp MB2   &kp UP    &kp F4     &trans                      &trans  &trans    &trans  &trans    &trans
@@ -251,10 +218,43 @@
         };
 
         /* [6] SCROLL */
-
         SCROLL {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+            >;
+        };
+
+        /* [7] SYSTEM */
+        SYSTEM {
+            bindings = <
+&bt0_jis    &bt1_us         &bt2_us   &bt3_us   &bt4_us                                  &trans  &trans  &trans  &trans  &trans
+&trans      &macro_s        &macro_d  &macro_s  &trans   &trans      &trans       &trans  &trans  &trans  &trans  &trans
+&bt BT_CLR  &bt BT_CLR_ALL  &kp N2    &kp N3    &trans   &trans      &bootloader  &trans  &trans  &trans  &trans  &trans
+&trans      &trans          &trans    &trans    &trans   &trans      &trans       &trans                          &trans
+            >;
+        };
+
+        /* [8] US_MAP */
+        US_MAP {
+            bindings = <
+&kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT                      &kp LCTRL  &kp AMPS     &kp LPAR  &kp RPAR  &kp EQUAL
+&trans    &trans  &trans    &trans    &trans     &trans      &trans  &kp TILDE  &kp RS(SQT)  &kp LBKT  &kp RBKT  &kp MINUS
+&trans    &trans  &trans    &trans    &trans     &trans      &trans  &kp DQT    &kp DQT      &kp LT    &kp GT    &kp QUESTION
+&trans    &trans  &trans    &trans    &trans     &trans      &trans  &trans                                      &trans
+            >;
+        };
+
+        /* [9] JIS_MAP */
+        JIS_MAP {
+            bindings = <
+&kp EXCL  &kp LBKT  &kp HASH  &kp DLLR  &kp PRCNT                      &kp UNDERSCORE  &kp SQT   &kp STAR  &kp LPAR  &kp RS(MINUS)
+&kp ESC   &trans    &macro_s  &macro_d  &macro_s   &trans      &trans  &kp AMPS        &kp SQT   &kp RBKT  &kp BSLH  &kp RS(INT1)
+&trans    &trans    &trans    &trans    &macro_d   &trans      &trans  &kp AT          &kp PLUS  &kp PLUS  &kp SQT   &kp RS(QUESTION)
+&trans    &trans    &trans    &trans    &trans     &trans      &trans  &trans                                        &trans
+            >;
+        };
+    };
+};
