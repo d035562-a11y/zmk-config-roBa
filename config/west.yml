@@ -1,13 +1,15 @@
 manifest:
   remotes:
+    # ▼ 1. ここを badjeff 氏のURLに変更します ▼
     - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
+      url-base: https://github.com/badjeff
     - name: kumamuk-git
       url-base: https://github.com/kumamuk-git
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: v0.3-branch
+      # ▼ 2. revisionを「step-up」に変更します ▼
+      revision: step-up
       import: app/west.yml
     - name: zmk-pmw3610-driver
       remote: kumamuk-git
