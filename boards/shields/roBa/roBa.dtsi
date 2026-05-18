@@ -64,7 +64,6 @@
             , <&key_physical_attrs 100 100  763  350 (-1000)     0   350>
 
             , <&key_physical_attrs 100 100 1200  337       0     0     0>
-
             ;
     };
 
@@ -82,9 +81,9 @@
 
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
-        /* label = "KSCAN"; を削除しました */
+        label = "KSCAN";
         diode-direction = "col2row";
-            row-gpios
+        row-gpios
                 = <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
                 , <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
                 , <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
@@ -97,6 +96,7 @@
         a-gpios = <&xiao_d 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         b-gpios = <&xiao_d 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         steps = <12>;
+        resolution = <4>;
         status = "disabled";
     };
 
