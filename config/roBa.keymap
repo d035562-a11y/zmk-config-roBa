@@ -4,7 +4,7 @@
 #include <dt-bindings/zmk/pointing.h>
 
 /* Qiita記事で紹介されていたスクロール量調整の定義 */
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 80
 
 /* --- レイヤー番号の定義（優先度順） --- */
 #define DEF   0
@@ -149,11 +149,14 @@
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
         };
 
-        /* ▼ 安全なPageUp/Downスクロール ▼ */
-        page_encoder: page_encoder {
+       // combosやmacrosと同じ階層に以下のbihaviorsを追記
+// スクロール方向を逆にしたい場合は <&msc SCRL_DOWN> と <&msc SCRL_UP> を入れ替えてください
+      encoder_msc_down_up: encoder_msc_down_up {
             compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&kp LC(PAGE_DOWN)>, <&kp LC(PAGE_UP)>;
+           label = "ENCODER_MSC_DOWN_UP";
+           #sensor-binding-cells = <0>;
+           bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+           tap-ms = <20>;
         };
     };
 
@@ -169,7 +172,7 @@
 &mt LSHIFT Z                 &kp X         &kp C         &kp V      &kp B        &mkp MB2           &lt 7 ESCAPE   &kp N        &kp M  &lt 5 COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH
 &mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 9 TAB  &lt 3 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                              &mt RIGHT_ALT LANGUAGE_1
             >;
-            sensor-bindings = <&scroll_encoder>;
+            sensor-bindings = <&encoder_msc_down_up>;
         };
 
         /* [1] US_DEFO */
@@ -180,7 +183,7 @@
 &mt LSHIFT Z                 &kp X         &kp C         &kp V      &kp B        &mkp MB2           &lt 7 ESCAPE   &kp N        &kp M  &lt 5 COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH
 &mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 8 TAB  &lt 4 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                              &mt RIGHT_ALT LANGUAGE_1
             >;
-            sensor-bindings = <&scroll_encoder>;
+            sensor-bindings = <&encoder_msc_down_up>;
         };
 
         /* [2] ARROW */
@@ -201,7 +204,7 @@
 &kp NUMBER_0  &kp F7    &kp F8        &kp F11       &trans        &trans      &trans  &kp PERIOD    &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_0
 &trans        &trans    &trans        &kp NUMBER_0  &trans        &trans      &trans  &kp NUMBER_0                                            &trans
             >;
-            sensor-bindings = <&page_encoder>;
+           sensor-bindings = <&encoder_msc_down_up>;
         };
 
         /* [4] NUM_US */
@@ -212,7 +215,7 @@
 &kp NUMBER_0  &kp F7    &kp F8        &kp F11       &trans        &trans      &trans  &kp PERIOD    &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_0
 &trans        &trans    &trans        &kp NUMBER_0  &trans        &trans      &trans  &kp NUMBER_0                                            &trans
             >;
-            sensor-bindings = <&page_encoder>;
+            sensor-bindings = <&encoder_msc_down_up>;
         };
 
         /* [5] MOUSE */
