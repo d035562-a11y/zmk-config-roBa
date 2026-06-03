@@ -4,7 +4,7 @@
 #include <dt-bindings/zmk/pointing.h>
 
 /* Qiita記事で紹介されていたスクロール量調整の定義 */
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 40
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 80
 
 /* --- レイヤー番号の定義（優先度順） --- */
 #define DEF   0
