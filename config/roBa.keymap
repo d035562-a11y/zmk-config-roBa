@@ -4,9 +4,11 @@
 #include <dt-bindings/zmk/pointing.h>
 
 /* Qiita記事で紹介されていたスクロール量調整の定義 */
+
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 80
 
 /* --- レイヤー番号の定義（優先度順） --- */
+
 #define DEF   0
 #define US_D  1
 #define NUM   2
@@ -30,6 +32,7 @@
 
 / {
     /* --- 1. コンボ設定 --- */
+
     combos {
         compatible = "zmk,combos";
 
@@ -60,6 +63,7 @@
     };
 
     /* --- 2. マクロ設定 --- */
+
     macros {
         to_layer_0: to_layer_0 {
             compatible = "zmk,behavior-macro-one-param";
@@ -133,60 +137,71 @@
     };
 
     /* --- 3. 挙動(Behaviors)設定 --- */
+
     behaviors {
         lt_to_layer_0: lt_to_layer_0 {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_TO_0";
             bindings = <&mo>, <&to_layer_0>;
+
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
 
         /* ▼ 最新ZMK仕様のマウススクロール ▼ */
+
         scroll_encoder: scroll_encoder {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
         };
 
-       // combosやmacrosと同じ階層に以下のbihaviorsを追記
-// スクロール方向を逆にしたい場合は <&msc SCRL_DOWN> と <&msc SCRL_UP> を入れ替えてください
-      encoder_msc_down_up: encoder_msc_down_up {
+        // combosやmacrosと同じ階層に以下のbihaviorsを追記
+        // スクロール方向を逆にしたい場合は <&msc SCRL_DOWN> と <&msc SCRL_UP> を入れ替えてください
+
+        encoder_msc_down_up: encoder_msc_down_up {
             compatible = "zmk,behavior-sensor-rotate";
-           label = "ENCODER_MSC_DOWN_UP";
-           #sensor-binding-cells = <0>;
-           bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-           tap-ms = <20>;
+            label = "ENCODER_MSC_DOWN_UP";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+
+            tap-ms = <20>;
         };
     };
 
     /* --- 4. キーマップ本体 --- */
+
     keymap {
         compatible = "zmk,keymap";
 
         /* [0] DEFAULT (JIS OS 用) */
+
         default_layer {
             bindings = <
-&kp Q                        &kp W         &kp E         &kp R      &kp T                                                          &kp Y        &kp U  &kp I        &kp O    &kp P
+&kp Q                        &kp W         &kp E         &kp R      &kp T                                          &kp Y        &kp U  &kp I        &kp O    &kp P
 &kp A                        &kp S         &kp D         &kp F      &kp G        &kp LS(LG(S))      &kp DELETE     &kp H        &kp J  &lt 6 K      &kp L    &mt RIGHT_CONTROL MINUS
 &mt LSHIFT Z                 &kp X         &kp C         &kp V      &kp B        &mkp MB2           &lt 7 ESCAPE   &kp N        &kp M  &lt 5 COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH
-&mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 9 TAB  &lt 3 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                              &mt RIGHT_ALT LANGUAGE_1
+&mt LC(LEFT_WIN) LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 9 TAB  &lt 3 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                               &mt RIGHT_ALT LANGUAGE_1
             >;
+
             sensor-bindings = <&encoder_msc_down_up>;
         };
 
         /* [1] US_DEFO */
+
         us_defo {
             bindings = <
-&kp Q                        &kp W         &kp E         &kp R      &kp T                                                          &kp Y        &kp U  &kp I        &kp O    &kp P
+&kp Q                        &kp W         &kp E         &kp R      &kp T                                          &kp Y        &kp U  &kp I        &kp O    &kp P
 &kp A                        &kp S         &kp D         &kp F      &kp G        &kp LS(LG(S))      &kp DELETE     &kp H        &kp J  &lt 6 K      &kp L    &mt RIGHT_CONTROL MINUS
 &mt LSHIFT Z                 &kp X         &kp C         &kp V      &kp B        &mkp MB2           &lt 7 ESCAPE   &kp N        &kp M  &lt 5 COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH
-&mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 8 TAB  &lt 4 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                              &mt RIGHT_ALT LANGUAGE_1
+&mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 8 TAB  &lt 4 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                               &mt RIGHT_ALT LANGUAGE_1
             >;
+
             sensor-bindings = <&encoder_msc_down_up>;
         };
 
         /* [2] ARROW */
+
         ARROW {
             bindings = <
 &trans  &kp F2  &trans  &kp F4  &trans                       &kp RS(RG(LEFT))  &kp F2    &kp UP    &kp F4     &kp RS(RG(RIGHT))
@@ -197,6 +212,7 @@
         };
 
         /* [3] NUM_JIS */
+
         NUM_JIS {
             bindings = <
 &kp PAGE_UP   &kp F2    &kp UP_ARROW  &kp F4        &kp MINUS                         &kp SLASH     &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp MINUS
@@ -204,10 +220,12 @@
 &kp NUMBER_0  &kp F7    &kp F8        &kp F11       &trans        &trans      &trans  &kp PERIOD    &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_0
 &trans        &trans    &trans        &kp NUMBER_0  &trans        &trans      &trans  &kp NUMBER_0                                            &trans
             >;
-           sensor-bindings = <&encoder_msc_down_up>;
+
+            sensor-bindings = <&encoder_msc_down_up>;
         };
 
         /* [4] NUM_US */
+
         NUM_US {
             bindings = <
 &kp PAGE_UP   &kp F2    &kp UP_ARROW  &kp F4        &kp MINUS                         &kp SLASH     &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp MINUS
@@ -215,10 +233,12 @@
 &kp NUMBER_0  &kp F7    &kp F8        &kp F11       &trans        &trans      &trans  &kp PERIOD    &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_0
 &trans        &trans    &trans        &kp NUMBER_0  &trans        &trans      &trans  &kp NUMBER_0                                            &trans
             >;
+
             sensor-bindings = <&encoder_msc_down_up>;
         };
 
         /* [5] MOUSE */
+
         MOUSE {
             bindings = <
 &trans     &mkp MB2   &kp UP    &kp F4     &trans                      &trans  &trans    &trans  &trans    &trans
@@ -229,6 +249,7 @@
         };
 
         /* [6] SCROLL */
+
         SCROLL {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
@@ -239,9 +260,10 @@
         };
 
         /* [7] SYSTEM */
+
         SYSTEM {
             bindings = <
-&bt0_jis    &bt1_us         &bt2_us   &bt3_us   &bt4_us                                  &trans  &trans  &trans  &trans  &trans
+&bt0_jis    &bt1_us         &bt2_us   &bt3_us   &bt4_us                           &trans  &trans  &trans  &trans  &trans
 &trans      &macro_s        &macro_d  &macro_s  &trans   &trans      &trans       &trans  &trans  &trans  &trans  &trans
 &bt BT_CLR  &bt BT_CLR_ALL  &kp N2    &kp N3    &trans   &trans      &bootloader  &trans  &trans  &trans  &trans  &trans
 &trans      &trans          &trans    &trans    &trans   &trans      &trans       &trans                          &trans
@@ -249,6 +271,7 @@
         };
 
         /* [8] US_MAP */
+
         US_MAP {
             bindings = <
 &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT                      &kp LCTRL  &kp AMPS     &kp LPAR  &kp RPAR  &kp EQUAL
@@ -259,6 +282,7 @@
         };
 
         /* [9] JIS_MAP */
+
         JIS_MAP {
             bindings = <
 &kp EXCL  &kp LBKT  &kp HASH  &kp DLLR  &kp PRCNT                      &kp UNDERSCORE  &kp SQT   &kp STAR  &kp LPAR  &kp RS(MINUS)
