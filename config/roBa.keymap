@@ -181,37 +181,22 @@
 &kp Q                    &kp W         &kp E         &kp R      &kp T                                          &kp Y        &kp U  &kp I        &kp O    &kp P
 &kp A                    &kp S         &kp D         &kp F      &kp G        &kp LS(LG(S))      &kp DELETE     &kp H        &kp J  &lt 6 K      &kp L    &mt RIGHT_CONTROL MINUS
 &mt LSHIFT Z             &kp X         &kp C         &kp V      &kp B        &mkp MB2           &lt 7 ESCAPE   &kp N        &kp M  &lt 5 COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH
-&mt LEFT_WIN LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 9 TAB  &lt 3 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                               &mt RIGHT_ALT LANGUAGE_1
+&mt LEFT_WIN LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_ALT  &lt 9 TAB  &lt 2 SPACE  &mkp MB1           &kp BACKSPACE  &lt 3 ENTER                               &mt RIGHT_ALT LANGUAGE_1
             >;
 
             sensor-bindings = <&encoder_msc_down_up>;
         };
-
-        /* [1] US_DEFO */
 
         us_defo {
             bindings = <
 &kp Q                        &kp W         &kp E         &kp R      &kp T                                          &kp Y        &kp U  &kp I        &kp O    &kp P
 &kp A                        &kp S         &kp D         &kp F      &kp G        &kp LS(LG(S))      &kp DELETE     &kp H        &kp J  &lt 6 K      &kp L    &mt RIGHT_CONTROL MINUS
 &mt LSHIFT Z                 &kp X         &kp C         &kp V      &kp B        &mkp MB2           &lt 7 ESCAPE   &kp N        &kp M  &lt 5 COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH
-&mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 8 TAB  &lt 4 SPACE  &mkp MB1           &kp BACKSPACE  &lt 2 ENTER                               &mt RIGHT_ALT LANGUAGE_1
+&mt LEFT_CONTROL LANGUAGE_2  &kp LEFT_ALT  &kp LEFT_WIN  &lt 8 TAB  &lt 4 SPACE  &mkp MB1           &kp BACKSPACE  &lt 3 ENTER                               &mt RIGHT_ALT LANGUAGE_1
             >;
 
             sensor-bindings = <&encoder_msc_down_up>;
         };
-
-        /* [2] ARROW */
-
-        ARROW {
-            bindings = <
-&trans  &kp F2  &trans  &kp F4  &trans                       &kp RS(RG(LEFT))  &kp F2    &kp UP    &kp F4     &kp RS(RG(RIGHT))
-&trans  &trans  &trans  &trans  &trans  &trans      &kp F13  &kp RA(LEFT)      &kp LEFT  &kp DOWN  &kp RIGHT  &trans
-&trans  &kp F7  &kp F8  &trans  &trans  &trans      &trans   &trans            &kp F7    &trans    &kp F8     &kp F11
-&trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans                                           &kp F12
-            >;
-        };
-
-        /* [3] NUM_JIS */
 
         NUM_JIS {
             bindings = <
@@ -224,7 +209,14 @@
             sensor-bindings = <&encoder_msc_down_up>;
         };
 
-        /* [4] NUM_US */
+        ARROW {
+            bindings = <
+&trans  &kp F2  &trans  &kp F4  &trans                       &kp RS(RG(LEFT))  &kp F2    &kp UP    &kp F4     &kp RS(RG(RIGHT))
+&trans  &trans  &trans  &trans  &trans  &trans      &kp F13  &kp RA(LEFT)      &kp LEFT  &kp DOWN  &kp RIGHT  &trans
+&trans  &kp F7  &kp F8  &trans  &trans  &trans      &trans   &trans            &kp F7    &trans    &kp F8     &kp F11
+&trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans                                           &kp F12
+            >;
+        };
 
         NUM_US {
             bindings = <
@@ -237,8 +229,6 @@
             sensor-bindings = <&encoder_msc_down_up>;
         };
 
-        /* [5] MOUSE */
-
         MOUSE {
             bindings = <
 &trans     &mkp MB2   &kp UP    &kp F4     &trans                      &trans  &trans    &trans  &trans    &trans
@@ -247,8 +237,6 @@
 &trans     &trans     &trans    &trans     &trans  &trans      &trans  &trans                              &trans
             >;
         };
-
-        /* [6] SCROLL */
 
         SCROLL {
             bindings = <
@@ -259,8 +247,6 @@
             >;
         };
 
-        /* [7] SYSTEM */
-
         SYSTEM {
             bindings = <
 &bt0_jis    &bt1_us         &bt2_us   &bt3_us   &bt4_us                           &trans  &trans  &trans  &trans  &trans
@@ -270,8 +256,6 @@
             >;
         };
 
-        /* [8] US_MAP */
-
         US_MAP {
             bindings = <
 &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT                      &kp LCTRL  &kp AMPS     &kp LPAR  &kp RPAR  &kp EQUAL
@@ -280,8 +264,6 @@
 &trans    &trans  &trans    &trans    &trans     &trans      &trans  &trans                                      &trans
             >;
         };
-
-        /* [9] JIS_MAP */
 
         JIS_MAP {
             bindings = <
