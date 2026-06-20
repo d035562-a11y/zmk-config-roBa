@@ -3,8 +3,8 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
-/* エンコーダバグ対策：数値を大きくしてゆっくり回すだけでスクロールするようにする */
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 150
+/* Qiita記事で紹介されていたスクロール量調整の定義 */
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
 
 /* --- レイヤー番号の定義（優先度順） --- */
 #define DEF   0
@@ -25,18 +25,41 @@
 
 &trackball {
     scroll-layers = <SCR>;
+    snipe-layers = <MOU>;
 };
 
 / {
+    /* --- 1. コンボ設定 --- */
     combos {
         compatible = "zmk,combos";
-        combo_esc { bindings = <&kp ESCAPE>; key-positions = <0 1>; };
-        combo_click { bindings = <&mkp MB1>; key-positions = <13 14>; };
-        combo_minus { bindings = <&kp MINUS>; key-positions = <31 32>; };
-        combo_alttab { bindings = <&kp LA(TAB)>; key-positions = <11 12>; };
-        combo_del { bindings = <&kp DELETE>; key-positions = <7 8>; };
+
+        combo_esc {
+            bindings = <&kp ESCAPE>;
+            key-positions = <0 1>;
+        };
+
+        combo_click {
+            bindings = <&mkp MB1>;
+            key-positions = <13 14>;
+        };
+
+        combo_minus {
+            bindings = <&kp MINUS>;
+            key-positions = <31 32>;
+        };
+
+        combo_alttab {
+            bindings = <&kp LA(TAB)>;
+            key-positions = <11 12>;
+        };
+
+        combo_del {
+            bindings = <&kp DELETE>;
+            key-positions = <7 8>;
+        };
     };
 
+    /* --- 2. マクロ設定 --- */
     macros {
         to_layer_0: to_layer_0 {
             compatible = "zmk,behavior-macro-one-param";
@@ -44,6 +67,7 @@
             bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
             label = "TO_LAYER_0";
         };
+
         macro_s: macro_s {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -52,6 +76,7 @@
             bindings = <&kp H &kp O &kp N &kp N &kp A &kp D &kp A &kp I>;
             label = "MACRO_S";
         };
+
         macro_d: macro_d {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -60,6 +85,7 @@
             bindings = <&kp LS(A) &kp N2 &kp N9 &kp N5 &kp X &kp P>;
             label = "MACRO_D";
         };
+
         bt0_jis: bt0_jis {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -68,6 +94,7 @@
             bindings = <&bt BT_SEL 0 &to 0>;
             label = "BT0_JIS";
         };
+
         bt1_us: bt1_us {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -76,6 +103,7 @@
             bindings = <&bt BT_SEL 1 &to 1>;
             label = "BT1_US";
         };
+
         bt2_us: bt2_us {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -84,6 +112,7 @@
             bindings = <&bt BT_SEL 2 &to 1>;
             label = "BT2_US";
         };
+
         bt3_us: bt3_us {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -92,6 +121,7 @@
             bindings = <&bt BT_SEL 3 &to 1>;
             label = "BT3_US";
         };
+
         bt4_us: bt4_us {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -102,6 +132,7 @@
         };
     };
 
+    /* --- 3. 挙動(Behaviors)設定 --- */
     behaviors {
         lt_to_layer_0: lt_to_layer_0 {
             compatible = "zmk,behavior-hold-tap";
@@ -111,12 +142,14 @@
             tapping-term-ms = <200>;
         };
 
+        /* ▼ 最新ZMK仕様のマウススクロール ▼ */
         scroll_encoder: scroll_encoder {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
         };
 
+        /* ▼ 安全なPageUp/Downスクロール ▼ */
         page_encoder: page_encoder {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
@@ -124,9 +157,11 @@
         };
     };
 
+    /* --- 4. キーマップ本体 --- */
     keymap {
         compatible = "zmk,keymap";
 
+        /* [0] DEFAULT (JIS OS 用) */
         default_layer {
             bindings = <
 &kp Q                        &kp W         &kp E         &kp R      &kp T                                                          &kp Y        &kp U  &kp I        &kp O    &kp P
@@ -137,6 +172,7 @@
             sensor-bindings = <&scroll_encoder>;
         };
 
+        /* [1] US_DEFO */
         us_defo {
             bindings = <
 &kp Q                        &kp W         &kp E         &kp R      &kp T                                                          &kp Y        &kp U  &kp I        &kp O    &kp P
@@ -147,6 +183,7 @@
             sensor-bindings = <&scroll_encoder>;
         };
 
+        /* [2] ARROW */
         ARROW {
             bindings = <
 &trans  &kp F2  &trans  &kp F4  &trans                       &kp RS(RG(LEFT))  &kp F2    &kp UP    &kp F4     &kp RS(RG(RIGHT))
@@ -156,6 +193,7 @@
             >;
         };
 
+        /* [3] NUM_JIS */
         NUM_JIS {
             bindings = <
 &kp PAGE_UP   &kp F2    &kp UP_ARROW  &kp F4        &kp MINUS                         &kp SLASH     &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp MINUS
@@ -166,6 +204,7 @@
             sensor-bindings = <&page_encoder>;
         };
 
+        /* [4] NUM_US */
         NUM_US {
             bindings = <
 &kp PAGE_UP   &kp F2    &kp UP_ARROW  &kp F4        &kp MINUS                         &kp SLASH     &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp MINUS
@@ -176,6 +215,7 @@
             sensor-bindings = <&page_encoder>;
         };
 
+        /* [5] MOUSE */
         MOUSE {
             bindings = <
 &trans     &mkp MB2   &kp UP    &kp F4     &trans                      &trans  &trans    &trans  &trans    &trans
@@ -185,6 +225,7 @@
             >;
         };
 
+        /* [6] SCROLL */
         SCROLL {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
@@ -194,6 +235,7 @@
             >;
         };
 
+        /* [7] SYSTEM */
         SYSTEM {
             bindings = <
 &bt0_jis    &bt1_us         &bt2_us   &bt3_us   &bt4_us                                  &trans  &trans  &trans  &trans  &trans
@@ -203,6 +245,7 @@
             >;
         };
 
+        /* [8] US_MAP */
         US_MAP {
             bindings = <
 &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT                      &kp LCTRL  &kp AMPS     &kp LPAR  &kp RPAR  &kp EQUAL
@@ -212,6 +255,7 @@
             >;
         };
 
+        /* [9] JIS_MAP */
         JIS_MAP {
             bindings = <
 &kp EXCL  &kp LBKT  &kp HASH  &kp DLLR  &kp PRCNT                      &kp UNDERSCORE  &kp SQT   &kp STAR  &kp LPAR  &kp RS(MINUS)
